@@ -28,4 +28,8 @@ public class Dictionary {
         }
         return "/show";
     }
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public String showCreateForm() {
+        return "/create";
+    }
 }

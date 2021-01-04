@@ -12,8 +12,8 @@
 </head>
 <body>
 <h1>Dictionary</h1>
-<h2>VietNamese:${vietNam}</h2>
-<h2>English:${english} ${message}</h2>
+<h2>English:${vietNam}</h2>
+<h2>VietNamese:${english} ${message}</h2>
 <h2><a href="/index.jsp">back</a></h2>
 </body>
 </html>
