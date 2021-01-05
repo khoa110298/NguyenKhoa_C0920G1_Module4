@@ -8,10 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>$Title$</title>
+    <title>calculate</title>
   </head>
   <body>
-  <form action="/calculate">
+  <form action="/calculate" method="post">
     <input type="text" name="number1">
     <input type="text" name="number2">
     <br>
