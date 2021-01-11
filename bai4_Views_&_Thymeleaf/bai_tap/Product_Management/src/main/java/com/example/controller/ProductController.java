@@ -27,7 +27,6 @@ public class ProductController {
     public String insertProduct(@ModelAttribute Product product, RedirectAttributes redirectAttributes) {
         product.setId(productService.selectAllProduct().get(productService.selectAllProduct().size()-1).getId()+1);
         productService.insertProduct(product);
-
         redirectAttributes.addFlashAttribute("message", "Create Success!!!");
         return "redirect:/product/list";
     }
@@ -55,7 +54,6 @@ public class ProductController {
     @GetMapping("/{id}/view")
     public String showProductByID(@PathVariable int id, Model model) {
         model.addAttribute("product", productService.selectProductById(id));
-
         return "/view";
     }
 
