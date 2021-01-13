@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:replace="~{/province/list :: head}">
+</head>
+<body>
+<div class="container">
+    <h1>Province</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th> ID</th>
+        <th> Name</th>
+    </tr>
+    </thead>
+    <tbody >
+        <tr th:each="customer : ${customer}">
+            <td th:text="${customer.id}"></td>
+            <td th:text="${customer.name}"></td>
+        </tr>
+    </tbody>
+</table>
+    <a th:href="@{/province}" class="btn btn-outline-primary">Back</a>
+</div>
+</body>
+</html>
