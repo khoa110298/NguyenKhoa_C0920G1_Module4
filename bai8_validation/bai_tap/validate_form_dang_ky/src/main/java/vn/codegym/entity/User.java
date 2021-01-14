@@ -8,7 +8,7 @@ import javax.validation.constraints.*;
 import java.lang.annotation.Annotation;
 
 @Component
-public class User implements Validator, Annotation {
+public class User implements Validator {
     @NotNull
     @Size(min = 5,max = 45)
     private String firstName;

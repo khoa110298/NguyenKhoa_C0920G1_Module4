@@ -11,6 +11,8 @@ public class Customer {
     private Long id;
     private String firstName;
     private String lastName;
+    @Column(unique = true)
+    private String email;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "province_id",referencedColumnName = "id")
     private Province province;

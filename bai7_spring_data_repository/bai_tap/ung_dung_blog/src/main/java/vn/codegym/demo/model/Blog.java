@@ -13,15 +13,22 @@ public class Blog {
     private String name;
     private String title;
     private String content;
-    @DateTimeFormat(pattern = "dd-mm-yyyy")
-    @Column(name = "post_date", columnDefinition = "DATE")
-    private String postDate;
+    @Column(name = "write_date", columnDefinition = "DATE")
+    private String writeDate;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id",referencedColumnName = "id")
     private Category category;
 
     public Blog() {
+    }
+
+    public Blog(String name, String title, String content, String writeDate, Category category) {
+        this.name = name;
+        this.title = title;
+        this.content = content;
+        this.writeDate = writeDate;
+        this.category = category;
     }
 
     public int getId() {
@@ -56,12 +63,12 @@ public class Blog {
         this.content = content;
     }
 
-    public String getPostDate() {
-        return postDate;
+    public String getWriteDate() {
+        return writeDate;
     }
 
-    public void setPostDate(String postDate) {
-        this.postDate = postDate;
+    public void setWriteDate(String writeDate) {
+        this.writeDate = writeDate;
     }
 
     public Category getCategory() {
