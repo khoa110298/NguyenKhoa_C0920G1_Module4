@@ -12,11 +12,12 @@ public class Blog {
     private int id;
     private String name;
     private String title;
+    @Column(name = "content", columnDefinition = "text")
     private String content;
     @Column(name = "write_date", columnDefinition = "DATE")
     private String writeDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "category_id",referencedColumnName = "id")
     private Category category;
 

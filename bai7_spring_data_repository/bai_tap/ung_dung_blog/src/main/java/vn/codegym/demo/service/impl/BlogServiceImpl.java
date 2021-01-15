@@ -3,6 +3,7 @@ package vn.codegym.demo.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import vn.codegym.demo.model.Blog;
 import vn.codegym.demo.repository.BlogRepository;
@@ -16,8 +17,15 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public List<Blog> findAll() {
-        return blogRepository.findAll();
+//        return blogRepository.findAll();
+            return blogRepository.findAll();
     }
+
+    @Override
+    public List<Blog> sortWriteDate(Pageable pageable) {
+        return null;
+    }
+
 
     @Override
     public Blog findById(int id) {
@@ -41,6 +49,6 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Page<Blog> findAll(Pageable pageable) {
-        return blogRepository.findAll(pageable);
+        return blogRepository.findAllByOrderByWriteDate(pageable);
     }
 }

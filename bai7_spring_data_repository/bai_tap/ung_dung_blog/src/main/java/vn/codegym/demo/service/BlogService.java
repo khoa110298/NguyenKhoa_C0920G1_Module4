@@ -9,6 +9,8 @@ import java.util.List;
 public interface BlogService {
     List<Blog> findAll();
 
+    List<Blog> sortWriteDate(Pageable pageable);
+
     Blog findById(int id);
 
     void save(Blog blog);
