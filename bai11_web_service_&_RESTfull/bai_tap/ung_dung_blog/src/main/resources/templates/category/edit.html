@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:replace="~{/category/list :: head}">
+</head>
+<body>
+<div class="container">
+    <h1>Update Province</h1>
+
+    <form th:action="@{/category/update}" th:object="${customer}" method="post" novalidate="novalidate">
+        <input class="form-control col-6" type="text" th:field="*{id}" readonly/>
+        <div class="form-group">
+            <label class="col-form-label col-2">Name</label>
+            <input class="form-control col-6" type="text" th:field="*{name}"/>
+        </div>
+
+        <input type="submit" class="btn btn-outline-success" value="Update"/>
+        <a th:href="@{/category}" class="btn btn-outline-primary">Back</a>
+    </form>
+</div>
+</body>
+</html>
