@@ -24,7 +24,7 @@ public class BlogController {
     private CategoryService categoryService;
 
     @GetMapping({"", "/list"})
-    public String listBogs(Model model, @PageableDefault(value = 5) Pageable pageable) {
+    public String listBogs(Model model, @PageableDefault(value = 2) Pageable pageable) {
         model.addAttribute("blogList", blogService.findAll(pageable));
         return "blog/list";
     }
@@ -71,7 +71,7 @@ public class BlogController {
     }
 
     @PostMapping("/search")
-    public ModelAndView searchByText(@RequestParam String inputSearch, @PageableDefault(value = 5) Pageable pageable) {
-        return new ModelAndView("blog/list", "customerList", blogService.findAllInputText(inputSearch, pageable));
+    public ModelAndView searchByText(@RequestParam String inputSearch, @PageableDefault(value = 2) Pageable pageable) {
+        return new ModelAndView("blog/list", "blogList", blogService.findAllInputText(inputSearch, pageable));
     }
 }
