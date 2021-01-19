@@ -1,9 +1,7 @@
 package vn.codegym.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "customer_type")
 public class CustomerType {
@@ -11,6 +9,8 @@ public class CustomerType {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
+    @OneToMany(mappedBy = "customerType")
+    List<Customer> customerList;
 
     public CustomerType() {
     }

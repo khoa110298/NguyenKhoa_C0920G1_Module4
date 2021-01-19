@@ -62,6 +62,7 @@
 <!--                <td id="tdNameContext"></td>-->
             </tr>
         </th:block>
+<!--<p id="tableList"></p>-->
         </tbody>
     </table>
     <div>
@@ -103,11 +104,20 @@
             url: "http://localhost:8080/blog/search?keyword=" + $("#inpKeyword").val(),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: function(result){
-                console.log("OK");
-                console.log(result[0].idContext);
-                $("#tdIdContext").text(result[0].idContext);
-                $("#tdNameContext").text(result[0].nameContext);
+            success: function(blogList){
+                // console.log("OK");
+                // console.log(result[0].idContext);
+                // $("#tdIdContext").text(result[0].idContext);
+                // $("#tdNameContext").text(result[0].nameContext);
+                for (let i = 0; i < blogList.length; i++) {
+                    data +=
+                        '<p>' + blogList[i].id + '</p>' +
+                        '<p>' + blogList[i].name + '</p>' +
+                        '<p>' + blogList[i].title + '</p>' +
+                        '<p>' + blogList[i].writeDate + '</p>' +
+                        '<p>' + blogList[i].category.id + '</p>';
+                }
+                $("#tableList").html(data);
             },
             error: function(result) {
             }
