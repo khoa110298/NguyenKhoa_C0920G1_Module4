@@ -16,7 +16,6 @@
             crossorigin="anonymous"></script>
 
 </head>
-
 <body>
 <div class="container">
     <form action="/customer/search" style="float: right" method="post">
@@ -55,10 +54,24 @@
         </th:block>
         </tbody>
     </table>
-    <div>
-        <a th:href="@{'/customer'(page=${customerList.number - 1})}" th:if="${customerList.hasPrevious()}">Previous</a>
-        <span th:text="${customerList.number + 1}"></span>/<span th:text="${customerList.totalPages}"></span>
-        <a th:href="@{'/customer'(page=${customerList.number + 1})}" th:if="${customerList.hasNext()}">Next</a>
+<!--    <div>-->
+<!--        <a th:href="@{'/customer'(page=${customerList.number - 1})}" th:if="${customerList.hasPrevious()}">Previous</a>-->
+<!--        <span th:text="${customerList.number + 1}"></span>/<span th:text="${customerList.totalPages}"></span>-->
+<!--        <a th:href="@{'/customer'(page=${customerList.number + 1})}" th:if="${customerList.hasNext()}">Next</a>-->
+<!--    </div>-->
+    <div class="pagination-div">
+    <span th:if="${customerList.hasPrevious()}">
+        <a th:href="@{/customer(page=${customerList.number - 1},size=${customerList.size})}">Previous</a>
+    </span>
+        <th:block th:each="i: ${#numbers.sequence(0, customerList.totalPages - 1)}">
+            <span th:if="${customerList.number == i}" class="selected">[[${i}+1]]</span>
+            <span th:unless="${customerList.number == i}">
+             <a th:href="@{/customer(page=${i},size=${customerList.size})}">[[${i}+1]]</a>
+        </span>
+        </th:block>
+        <span th:if="${customerList.hasNext()}">
+        <a th:href="@{/customer(page=${customerList.number+1},size=${customerList.size})}">Next</a>
+    </span>
     </div>
 </div>
 </body>

@@ -7,13 +7,21 @@ import org.springframework.stereotype.Service;
 import vn.codegym.entity.Customer;
 import vn.codegym.repository.CustomerRepository;
 import vn.codegym.service.CustomerService;
+
+import java.util.List;
+
 @Service
 public class CustomerServiceImpl implements CustomerService {
     @Autowired
     CustomerRepository customerRepository;
     @Override
     public Page<Customer> findAll(Pageable pageable) {
-        return null;
+        return customerRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Customer> findAll() {
+        return customerRepository.findAll();
     }
 
     @Override
@@ -33,6 +41,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Page<Customer> findAllInputText(String name, Pageable pageable) {
-        return null;
+        return customerRepository.findAllByNameContaining(name,pageable);
     }
 }

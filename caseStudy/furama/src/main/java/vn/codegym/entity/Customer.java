@@ -12,15 +12,16 @@ public class Customer {
     private String idCard;
     private String phone;
     private String email;
+    private String address;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "customer_type_id",referencedColumnName = "id")
     private CustomerType customerType;
 
     public Customer() {
     }
 
-    public Customer(String id, String name, String birthday, String gender, String idCard, String phone, String email, CustomerType customerType) {
+    public Customer(String id, String name, String birthday, String gender, String idCard, String phone, String email,String address) {
         this.id = id;
         this.name = name;
         this.birthday = birthday;
@@ -28,7 +29,7 @@ public class Customer {
         this.idCard = idCard;
         this.phone = phone;
         this.email = email;
-        this.customerType = customerType;
+        this.address = address;
     }
 
     public String getId() {
@@ -89,6 +90,14 @@ public class Customer {
 
     public CustomerType getCustomerType() {
         return customerType;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public void setCustomerType(CustomerType customerType) {

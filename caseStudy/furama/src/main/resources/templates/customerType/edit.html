@@ -6,7 +6,7 @@
 <div class="container">
     <h1>Create new CustomerType</h1>
     <form th:action="@{/customerType/update}" th:object="${customerType}" method="post" novalidate="novalidate">
-        <input class="form-control col-6" type="hidden" th:field="*{id}" />
+        <input class="form-control col-6" type="text" th:field="*{id}" th:readonly/>
         <div class="form-group">
 
             <label class="col-form-label col-2">Name</label>

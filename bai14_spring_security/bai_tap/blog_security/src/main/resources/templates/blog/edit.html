@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:replace="~{/blog/list :: head}">
+</head>
+<body>
+<div class="container">
+    <h1>Update Blog</h1>
+
+    <form th:action="@{/blog/update}" th:object="${blog}" method="post" novalidate="novalidate">
+        <input class="form-control col-6" type="text" th:field="*{id}" readonly/>
+        <div class="form-group">
+            <label class="col-form-label col-2">Name</label>
+            <input class="form-control col-6" type="text" th:field="*{name}"/>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">Title</label>
+            <input class="form-control col-6" type="text" th:field="*{title}"/>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">Content</label>
+            <input class="form-control col-6" type="text" th:field="*{content}"/>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">write date</label>
+            <input class="form-control col-6" type="date" th:field="*{writeDate}"/>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">Category</label>
+            <select th:field="*{category}" >
+                <option th:each="p:${categoryList}" th:text="${p.name}" th:value="${p.id}" th:selected="(${p.id} == *{category.id})"></option>
+            </select>
+        </div>
+        <input type="submit" class="btn btn-outline-success" value="Update"/>
+        <a th:href="@{/blog}" class="btn btn-outline-primary">Back</a>
+    </form>
+</div>
+</body>
+</html>

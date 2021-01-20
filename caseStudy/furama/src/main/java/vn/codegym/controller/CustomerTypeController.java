@@ -53,4 +53,5 @@ public class CustomerTypeController {
         redirectAttributes.addFlashAttribute("message","delete success!!!!");
         return "redirect:/customerType";
     }
+
 }

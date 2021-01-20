@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Position information</h1>
+<p th:text="'ID: '+ ${customerType.id}"></p>
+<p th:text="'Name: ' + ${customerType.name}"></p>
+<a th:href="@{/position}" class="btn btn-outline-primary">Back</a>
+</body>
+</html>
