@@ -6,8 +6,8 @@ import java.util.List;
 @Entity(name = "customer_type")
 public class CustomerType {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private String name;
     @OneToMany(mappedBy = "customerType")
     List<Customer> customerList;
@@ -23,7 +23,7 @@ public class CustomerType {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

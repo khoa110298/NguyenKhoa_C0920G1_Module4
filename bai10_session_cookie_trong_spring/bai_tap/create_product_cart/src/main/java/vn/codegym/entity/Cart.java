@@ -1,17 +1,16 @@
 package vn.codegym.entity;
 
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Cart {
     private Product product;
+    private int quantity;
 
     public Cart() {
     }
 
-    public Cart(Product product) {
+    public Cart(Product product,int quantity) {
         this.product = product;
+        this.quantity = quantity;
     }
 
     public Product getProduct() {
@@ -22,27 +21,11 @@ public class Cart {
         this.product = product;
     }
 
-    private Map<Product, Integer> cart = new HashMap<>();
-
-    public void addToCart(Product product){
-        if(cart.containsKey(product)){
-            cart.replace(product,cart.get(product),cart.get(product)+1);
-        }else {
-            cart.put(product,1);
-        }
-    }
-    public void removeProduct(Product product){
-        cart.remove(product);
-    }
-    public int getAmount(Product product){
-        return cart.get(product);
+    public int getQuantity() {
+        return quantity;
     }
 
-    public Map<Product, Integer> getCart() {
-        return cart;
-    }
-
-    public void setCart(Map<Product, Integer> cart) {
-        this.cart = cart;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

@@ -1,18 +1,23 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
+
 <html lang="en"  xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{/customerType/list :: head}">
+<head th:replace="~{/category/list :: head}">
 </head>
 <body>
 <div class="container">
-    <h1>Create new Division</h1>
-    <form th:action="@{/division/save}" th:object="${customerType}" method="post" novalidate="novalidate">
+    <h1>Create new Category</h1>
+
+    <form th:action="@{/category/save}" th:object="${customer}" method="post" novalidate="novalidate">
         <div class="form-group">
             <label class="col-form-label col-2">Name</label>
             <input class="form-control col-6" type="text" th:field="*{name}"/>
         </div>
         <input type="submit" class="btn btn-outline-success" value="Create"/>
-        <a th:href="@{/division}" class="btn btn-outline-primary">Back</a>
+        <a th:href="@{/category}" class="btn btn-outline-primary">Back</a>
     </form>
 </div>
+
+
 </body>
 </html>

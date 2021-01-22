@@ -1,52 +1,59 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>product</title>
+    <title>Cart</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 <h1 style="color: blue;text-align: center">Product MotorBike</h1>
-<br>
-<!--<table class="table table-striped">-->
-<!--    <thead>-->
-<!--    <tr>-->
-<!--        <th scope="col">id</th>-->
-<!--        <th scope="col">name</th>-->
-<!--        <th scope="col">price</th>-->
-<!--        <th scope="col">img</th>-->
-<!--        <th scope="col">description</th>-->
-<!--        <th scope="col">Buy</th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody>-->
-<!--    <tr th:each="pro:${product}">-->
-<!--        <td th:text="${product.id}"></td>-->
-<!--        <td >-->
-<!--            <a th:href="@{/product/{id}/view(id=${product.id})}" th:text="${product.name}"></a>-->
-<!--        </td>-->
-<!--        <td th:text="${product.price}"></td>-->
-<!--        <td>-->
-<!--            <img th:src="${product.img}" style="width: 100px" height="100px">-->
-<!--        </td>-->
-<!--        <td th:text="${product.description}"></td>-->
-<!--        <td>-->
-<!--            <button>-->
-<!--                <a th:href="@{/product/addToCart/{id}(id=${product.id})}">Buy</a>-->
-<!--            </button>-->
-<!--        </td>-->
-<!--    </tr>-->
+<h2 style="float: right"><a th:href="@{/product}">list product</a></h2>
+<div class="container">
+    <div class="content">
+        <div class="shopping_cart">
+            <div th:each="map:${session.myCartItems}">
+                <div class="cart_box">
+                    <div class="message">
+                        <div style="float: left">
+                            <div class="list_close"><a
+                                    th:href="@{/cart/{productId}/remove(productId=${map.getValue().getProduct().getId()})}">Remove
+                                item</a></div>
+                            <div class="list_img"><img th:src="${map.getValue().product.img}" class="img-responsive"
+                                                       alt="" style="height: 200px;width: 200px"></div>
 
-<!--    </tbody>-->
-<!--</table>-->
+                        </div>
+                        <div style="float: left;margin-left: 50px">
+                            <h4><a href="#" th:text="${map.value.product.name}"/></h4>
+                            <h6>description: <label th:text="${map.getValue().getProduct().getDescription()}"></label>
+                            </h6>
+                            <h6>price: <label th:text="${map.getValue().getProduct().getPrice()}"></label></h6>
+                            <h6>quantity: <label th:text="${map.getValue().getQuantity()}"></label></h6>
+                            <h6>total:
+                                <label th:text="${map.value.quantity}"/> x
+                                <label th:text="${map.value.product.price}"/> = <span class="actual">  <label
+                                        th:text="${map.value.quantity * map.value.product.price}"/></span>
+                            </h6>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+</div>
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
 </html>

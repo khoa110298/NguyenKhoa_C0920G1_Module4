@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/employee/list::head}">
+</head>
+<body>
+<div class="container">
+    <h1>Create new Employee</h1>
+    <form th:action="@{/employee/save}" th:object="${employee}" method="post" novalidate="novalidate">
+        <div class="form-group">
+            <label class="col-form-label col-2">Id</label>
+            <input class="form-control col-6" type="text" th:field="*{id}" th:readonly />
+            <h2 th:if="${message}" th:text="${message}" style="color: red"></h2>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">Name</label>
+            <input class="form-control col-6" type="text" th:field="*{name}"/>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">Birthday</label>
+            <input class="form-control col-6" type="text" th:field="*{birthday}"/>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">id Card</label>
+            <input class="form-control col-6" type="text" th:field="*{idCard}"/>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">Salary</label>
+            <input class="form-control col-6" type="text" th:field="*{salary}"/>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">phone</label>
+            <input class="form-control col-6" type="text" th:field="*{phone}"/>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">Email</label>
+            <input class="form-control col-6" type="text" th:field="*{email}"/>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">Address</label>
+            <input class="form-control col-6" type="text" th:field="*{address}"/>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">position</label>
+            <select th:field="*{position}" >
+                <option th:each="cusType:${positionList}" th:text="${cusType.name}" th:value="${cusType.id}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">Education Degree</label>
+            <select th:field="*{educationDegree}" >
+                <option th:each="cusType:${educationDegreeList}" th:text="${cusType.name}" th:value="${cusType.id}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">Division</label>
+            <select th:field="*{division}" >
+                <option th:each="cusType:${divisionList}" th:text="${cusType.name}" th:value="${cusType.id}"></option>
+            </select>
+        </div>
+        <input type="submit" class="btn btn-outline-success" value="Create"/>
+        <a th:href="@{/employee}" class="btn btn-outline-primary">Back</a>
+    </form>
+</div>
+</body>
+</html>

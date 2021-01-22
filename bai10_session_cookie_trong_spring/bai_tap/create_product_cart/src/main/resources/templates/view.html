@@ -6,8 +6,11 @@
     <title>view</title>
 </head>
 <body>
-<h2>Detail</h2>
-
-<a th:href="@{/product/addToCart/{id}(id=${product.getId()})}">Buy</a>
+<h2>product Detail</h2>
+<h1 th:text="${product.name}"></h1>
+<p th:text="${product.price}"></p>
+<img th:src="${product.img}" style="height: 200px;width: 200px"></p>
+<p th:text="${product.description}"></p>
+<a th:href="@{/cart/{id}/add(id=${product.id})}">Buy</a> | <a th:href="@{/product}">list product</a>
 </body>
 </html>

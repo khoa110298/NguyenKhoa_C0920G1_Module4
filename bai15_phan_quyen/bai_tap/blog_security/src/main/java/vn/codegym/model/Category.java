@@ -1,23 +1,21 @@
-package vn.codegym.entity;
+package vn.codegym.model;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
-public class EducationDegree {
+@Entity(name = "category")
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
 
-    @OneToMany(mappedBy = "educationDegree")
-    List<Employee> employeeList;
+    @OneToMany(mappedBy = "category")
+    private List<Blog> blogList;
 
-    public EducationDegree() {
+    public Category() {
     }
-
-    public EducationDegree(int id, String name) {
-        this.id = id;
+    public Category(String name) {
         this.name = name;
     }
 
@@ -37,11 +35,11 @@ public class EducationDegree {
         this.name = name;
     }
 
-    public List<Employee> getEmployeeList() {
-        return employeeList;
+    public List<Blog> getBlogList() {
+        return blogList;
     }
 
-    public void setEmployeeList(List<Employee> employeeList) {
-        this.employeeList = employeeList;
+    public void setBlogList(List<Blog> blogList) {
+        this.blogList = blogList;
     }
 }
