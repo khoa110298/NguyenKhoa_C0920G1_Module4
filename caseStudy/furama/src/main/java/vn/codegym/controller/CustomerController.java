@@ -33,11 +33,26 @@ public class CustomerController {
         return "customer/create";
     }
     @PostMapping("/save")
-    public String createCustomer(@ModelAttribute Customer customer, RedirectAttributes redirectAttributes){
+    public String createCustomer(@ModelAttribute Customer customer, RedirectAttributes redirectAttributes,Model model){
+        String id = customer.getId();
+        boolean check = true;
+        for (Customer cus:customerService.findAll()){
+            if (id.equals(cus.getId())){
+                check = false;
+                break;
+            }
+        }
+        if (check){
+            customerService.save(customer);
+            redirectAttributes.addFlashAttribute("message","create success!!!");
+            return "redirect:/customer/list";
+        }else {
+            model.addAttribute("message1","id đã tồn tại!!");
+            model.addAttribute("customerTypeList",customerTypeService.findAll());
+            model.addAttribute("customer",new Customer());
+            return "customer/create";
+        }
 
-        customerService.save(customer);
-        redirectAttributes.addFlashAttribute("message","create success!!!");
-        return "redirect:/customer";
     }
     @GetMapping("/{id}/view")
     public String customerDetail(@PathVariable("id") String id,Model model){
@@ -49,7 +64,7 @@ public class CustomerController {
     public String deleteCustomer(@PathVariable("id") String id,RedirectAttributes redirectAttributes){
         customerService.remove(id);
         redirectAttributes.addFlashAttribute("message","delete success!!!");
-        return "redirect:/customer";
+        return "redirect:/customer/list";
     }
     @GetMapping("/{id}/update")
     public String showUpdateCustomer(@PathVariable("id") String id,Model model){
@@ -70,7 +85,7 @@ public class CustomerController {
         if (check) {
             customerService.save(customer);
             redirectAttributes.addFlashAttribute("message", "update success!!!");
-            return "redirect:/customer";
+            return "redirect:/customer/list";
         }else {
                 model.addAttribute("customerTypeList",customerTypeService.findAll());
                 model.addAttribute("message","id không tồn tại !!!");

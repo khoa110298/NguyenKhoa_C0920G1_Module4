@@ -1,38 +1,45 @@
 package vn.codegym.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class BookBorrowCard {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    private Integer numberBorrow;
-
-    public BookBorrowCard(Integer numberBorrow) {
-        this.numberBorrow = numberBorrow;
-    }
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String nameStudent;
+    @OneToMany(mappedBy = "bookBorrowCard")
+    private List<BookBorrowHistory> borrowHistoryList;
 
     public BookBorrowCard() {
     }
 
-    public Integer getId() {
+    public BookBorrowCard(String nameStudent) {
+        this.nameStudent = nameStudent;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Integer getNumberBorrow() {
-        return numberBorrow;
+    public String getNameStudent() {
+        return nameStudent;
     }
 
-    public void setNumberBorrow(Integer numberBorrow) {
-        this.numberBorrow = numberBorrow;
+    public void setNameStudent(String nameStudent) {
+        this.nameStudent = nameStudent;
+    }
+
+    public List<BookBorrowHistory> getBorrowHistoryList() {
+        return borrowHistoryList;
+    }
+
+    public void setBorrowHistoryList(List<BookBorrowHistory> borrowHistoryList) {
+        this.borrowHistoryList = borrowHistoryList;
     }
 }

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>view</title>
+</head>
+<body>
+<h1>Borrow Book</h1>
+<p th:text="'name Student: ' + ${history.bookBorrowCard.nameStudent}"></p>
+<p th:text="'name book: ' + ${history.book.name}"></p>
+<p th:text="'date borrow: ' + ${history.dateBorrow}"></p>
+<a th:href="@{/borrow/list}" class="btn btn-outline-primary">Back</a>|<a th:href="@{/borrow/{id}/delete(id=${history.id})}" class="btn btn-outline-primary">trả sách</a>
+</body>
+</html>

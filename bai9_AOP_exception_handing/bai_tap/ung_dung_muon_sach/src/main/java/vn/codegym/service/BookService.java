@@ -11,7 +11,6 @@ public interface BookService {
 
     void save(Book book);
 
-    String borrow(Integer id) throws Exception;
+    void remove(Integer id);
 
-    String giveBack(Integer loanNumber, Integer id);
 }

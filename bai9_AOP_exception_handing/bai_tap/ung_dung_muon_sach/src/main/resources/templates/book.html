@@ -2,37 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Create</title>
+    <title>Book</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 </head>
 <body>
+<div class="container">
+        <a th:href="@{/borrow/list}">History Borrow Book</a><br>
+    <h3 th:if="${message}" th:text="${message}"></h3>
+    <table class="table table-striped" >
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Quantity</th>
+        </tr>
+        <th:block th:each="book : ${bookList}">
+            <tr>
+                <td th:text="${book.id}"></td>
+                <td th:text="${book.name}"></td>
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.quantity}"></td>
+            </tr>
+        </th:block>
+    </table>
+    <button type="button" class="btn btn-primary"><a style="color: black" th:href="@{/book/create}">mượn sách</a></button>
+</div>
 
-<a th:href="@{/book/list}">
-    Back to Book
-</a><br><br>
-<form th:action="@{/borrow/create}" method="post" th:object="${borrowBook}">
-    <div>name student :
-        <select th:field="*{bookBorrowCard}">
-            <option th:each="bookcart:${bookCartList}" th:text="${bookcart.nameStudent}" th:value="${bookcart.id}"></option>
-        </select>
-    </div><br>
-
-    <div>name book :
-        <select th:field="*{book}">
-            <option th:each="books:${bookList}" th:text="${books.author}" th:value="${books.id}"></option>
-        </select>
-    </div>
-    <br>
-
-    <div>ngày mượn :
-        <input type="date" th:field="*{dateBorrow}"/>
-    </div><br><br>
-
-    <input type="submit" value="Create"/>
-</form>
-
-<h3 th:if="${message}" th:text="${message}"></h3>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"

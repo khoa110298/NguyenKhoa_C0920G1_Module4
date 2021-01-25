@@ -1,9 +1,7 @@
 package vn.codegym.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Book {
@@ -11,8 +9,11 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
-    private String content;
+    private String author;
     private Integer quantity;
+
+    @OneToMany(mappedBy = "book")
+    private List<BookBorrowHistory> borrowHistoryList;
 
     public Book() {
     }
@@ -33,12 +34,20 @@ public class Book {
         this.name = name;
     }
 
-    public String getContent() {
-        return content;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public List<BookBorrowHistory> getBorrowHistoryList() {
+        return borrowHistoryList;
+    }
+
+    public void setBorrowHistoryList(List<BookBorrowHistory> borrowHistoryList) {
+        this.borrowHistoryList = borrowHistoryList;
     }
 
     public Integer getQuantity() {
