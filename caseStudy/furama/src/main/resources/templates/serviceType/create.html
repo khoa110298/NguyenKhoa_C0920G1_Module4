@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/index :: head}">
+</head>
+<body>
+<div class="container">
+    <h1>Create new ServiceType</h1>
+    <form th:action="@{/serviceType/save}" th:object="${customerType}" method="post" novalidate="novalidate">
+        <div class="form-group">
+            <label class="col-form-label col-2">Name</label>
+            <input class="form-control col-6" type="text" th:field="*{name}"/>
+        </div>
+        <input type="submit" class="btn btn-outline-success" value="Create"/>
+
+    </form>
+    <a th:href="@{/serviceType}" class="btn btn-outline-primary">Back</a>
+</div>
+</body>
+</html>

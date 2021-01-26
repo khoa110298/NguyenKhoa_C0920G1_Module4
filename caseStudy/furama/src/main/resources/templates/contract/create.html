@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/index :: head}">
+</head>
+<body>
+<div class="container">
+    <h1>Create new Contract</h1>
+    <form th:action="@{/contract/save}" th:object="${contract}" method="post" novalidate="novalidate">
+        <div class="form-group">
+            <label class="col-form-label col-2">Id</label>
+            <input class="form-control col-6" type="text" th:field="*{id}"/>
+            <label style="color: red" th:if="${messageId}" th:text="${messageId}"></label>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">Start Date</label>
+            <input class="form-control col-6" type="text" th:field="*{startDate}"/>
+            <label style="color: red" th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></label>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">End Date</label>
+            <input class="form-control col-6" type="text" th:field="*{endDate}"/>
+            <label style="color: red" th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></label>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">deposit</label>
+            <input class="form-control col-6" type="text" th:field="*{deposit}"/>
+            <label style="color: red" th:if="${#fields.hasErrors('deposit')}" th:errors="*{deposit}"></label>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">total money</label>
+            <input class="form-control col-6" type="text" th:field="*{totalMoney}"/>
+            <label style="color: red" th:if="${#fields.hasErrors('totalMoney')}" th:errors="*{totalMoney}"></label>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">Customer Type</label>
+            <select th:field="*{employee}" >
+                <option th:each="cusType:${employeeList}" th:text="${cusType.name}" th:value="${cusType.id}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">Customer Type</label>
+            <select th:field="*{customer}" >
+                <option th:each="cusType:${customerList}" th:text="${cusType.name}" th:value="${cusType.id}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">Customer Type</label>
+            <select th:field="*{serviceEntity}" >
+                <option th:each="cusType:${serviceList}" th:text="${cusType.name}" th:value="${cusType.id}"></option>
+            </select>
+        </div>
+        <input type="submit" class="btn btn-outline-success" value="Create"/>
+    </form>
+    <a th:href="@{/contract}" class="btn btn-outline-primary">Back</a>
+</div>
+</body>
+</html>

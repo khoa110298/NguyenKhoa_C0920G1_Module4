@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout::head}">
+</head>
+<body>
+<div th:insert="~{layout::content}"></div>
+<div id="content">
+<div class="container">
+    <form style="float: right" th:action="@{/service/list}" class="form-inline my-2 my-lg-0" method="post">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search by name" aria-label="Search"
+               th:name="keyword">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <h1 class="text-center"> <a th:href="@{/service}">Service List</a></h1>
+    <a th:href="@{/service/create}">Create New Service</a>
+    <h2 th:if="${message}" th:text="${message}" style="color: red"></h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Cost</th>
+            <th>Max People</th>
+            <th>number of floors</th>
+            <th>RentType Id</th>
+            <th>ServiceType Id</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="service : ${serviceList}">
+            <tr>
+                <td th:text="${service.id}"></td>
+                <td><a th:href="@{/service/{id}/view(id=${service.id})}" th:text="${service.name}"></a></td>
+<!--                <td th:text="${service.area}"></td>-->
+                <td th:text="${service.cost}"></td>
+                <td th:text="${service.maxPeople}"></td>
+<!--                <td th:text="${service.standardRoom}"></td>-->
+<!--                <td th:text="${service.description}"></td>-->
+<!--                <td th:text="${service.poolArea}"></td>-->
+                <td th:text="${service.numberOfFloors}"></td>
+                <td th:text="${service.rentType.name}"></td>
+                <td th:text="${service.serviceType.name}"></td>
+                <td><a th:href="@{/service/{id}/update(id=${service.id})}" class="btn btn-outline-primary">Edit</a>
+                </td>
+                <td><a th:href="@{/service/{id}/delete(id=${service.id})}" class="btn btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+
+    <div class="pagination-div">
+    <span th:if="${serviceList.hasPrevious()}">
+        <a th:href="@{/service(page=${serviceList.number - 1},keyword=${keywordOld},size=${serviceList.size})}">Previous</a>
+    </span>
+        <th:block th:each="i: ${#numbers.sequence(0, serviceList.totalPages - 1)}">
+            <span th:if="${serviceList.number == i}" class="selected">[[${i}+1]]</span>
+            <span th:unless="${serviceList.number == i}">
+             <a th:href="@{/service(page=${i},size=${serviceList.size},keyword=${keywordOld})}">[[${i}+1]]</a>
+        </span>
+        </th:block>
+        <span th:if="${serviceList.hasNext()}">
+        <a th:href="@{/service(page=${serviceList.number+1},keyword=${keywordOld},size=${serviceList.size})}">Next</a>
+    </span>
+    </div>
+</div>
+</div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"  xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{/customerType/list :: head}">
+<head th:replace="~{/index :: head}">
 </head>
 <body>
 <div class="container">
@@ -13,8 +13,9 @@
             <input class="form-control col-6" type="text" th:field="*{name}"/>
         </div>
         <input type="submit" class="btn btn-outline-success" value="Save"/>
-        <a th:href="@{/educationDegree}" class="btn btn-outline-primary">Back</a>
+
     </form>
+    <a th:href="@{/educationDegree}" class="btn btn-outline-primary">Back</a>
 </div>
 </body>
 </html>

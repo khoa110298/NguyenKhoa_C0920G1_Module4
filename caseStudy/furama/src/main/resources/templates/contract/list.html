@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout::head}">
+</head>
+<body>
+<div th:insert="~{layout::content}"></div>
+<div id="content">
+<div class="container">
+    <!--    <form action="/customer/search" style="float: right" method="post">-->
+    <!--        <input type="text" th:name="keyword" placeholder="search by name">-->
+    <!--        <input type="submit" th:value="Search">-->
+    <!--    </form>-->
+    <form style="float: right" th:action="@{/contract/list}" class="form-inline my-2 my-lg-0" method="get">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search by name" aria-label="Search"
+               th:name="keyword">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
+
+    <h1 class="text-center" > <a th:href="@{/contract}">Contract List</a></h1>
+    <a th:href="@{/contract/create}">Create New Contract</a>
+    <h2 th:if="${message}" th:text="${message}" style="color: red"></h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Deposit</th>
+            <th>Total Money</th>
+            <th>Name Employee</th>
+            <th>Name Customer</th>
+            <th>Name Service</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="contract : ${contractList}">
+            <tr>
+                <td th:text="${contract.id}"></td>
+                <td th:text="${contract.startDate}"></td>
+                <td th:text="${contract.endDate}"></td>
+                <td th:text="${contract.deposit}"></td>
+                <td th:text="${contract.totalMoney}"></td>
+                <td th:text="${contract.employee.getName()}"></td>
+                <td th:text="${contract.customer.getName()}"></td>
+                <td><a th:href="@{/contract/{id}/update(id=${contract.id})}" class="btn btn-outline-primary">Edit</a>
+                </td>
+                <td><a th:href="@{/contract/{id}/delete(id=${contract.id})}" class="btn btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+<!--        <div>-->
+<!--            <a th:href="@{'/customer'(page=${customerList.number - 1})}"-->
+<!--               th:if="${customerList.hasPrevious()}">Previous</a>-->
+<!--            <span th:text="${customerList.number + 1}"></span>/<span th:text="${customerList.totalPages}"></span>-->
+<!--            <a th:href="@{'/customer'(page=${customerList.number + 1})}" th:if="${customerList.hasNext()}">Next</a>-->
+<!--        </div>-->
+
+<!--    <div>-->
+<!--        <a class="btn btn-dark"-->
+<!--           th:href="@{'/customer/list'(page=${customerList.number - 1},keyword = ${keywordOld})}"-->
+<!--           th:if="${customerList.hasPrevious()}">Previous</a>-->
+<!--        <span th:text="${customerList.number + 1}"></span>/<span th:text="${customerList.totalPages}"></span>-->
+<!--        <a class="btn btn-dark"-->
+<!--           th:href="@{'/customer/list'(page=${customerList.number + 1},keyword = ${keywordOld})}"-->
+<!--           th:if="${customerList.hasNext()}">Next</a>-->
+<!--    </div>-->
+
+    <div class="pagination-div">
+    <span th:if="${contractList.hasPrevious()}">
+        <a th:href="@{/contract(page=${contractList.number - 1},keyword = ${search},size=${contractList.size})}">Previous</a>
+    </span>
+        <th:block th:each="i: ${#numbers.sequence(0, contractList.totalPages - 1)}">
+            <span th:if="${contractList.number == i}" class="selected">[[${i}+1]]</span>
+            <span th:unless="${contractList.number == i}">
+             <a th:href="@{/contract(page=${i},size=${contractList.size},keyword = ${search})}">[[${i}+1]]</a>
+        </span>
+        </th:block>
+        <span th:if="${contractList.hasNext()}">
+        <a th:href="@{/contract(page=${contractList.number+1},keyword = ${search},size=${contractList.size})}">Next</a>
+    </span>
+    </div>
+</div>
+</div>
+</body>
+</html>

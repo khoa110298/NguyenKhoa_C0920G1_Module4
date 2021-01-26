@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/layout::head}">
+</head>
+<body>
+<div th:insert="~{layout::content}"></div>
+<div id="content">
+    <div class="container">
+        <h1 class="text-center">RentType List</h1>
+        <a th:href="@{/rentType/create}">Create new RentType</a>
+        <h2 th:text="${message}" style="color: red"></h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Cost</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="cusType : ${customerTypeList}">
+                <tr>
+                    <td th:text="${cusType.id}"></td>
+                    <td><a th:href="@{/serviceType/{id}/view(id=${cusType.id})}" th:text="${cusType.name}"></a></td>
+                    <td th:text="${cusType.cost}"></td>
+                    <td><a th:href="@{/rentType/{id}/update(id=${cusType.id})}" class="btn btn-outline-primary">Edit</a>
+                    </td>
+                    <td><a th:href="@{/rentType/{id}/delete(id=${cusType.id})}"
+                           class="btn btn-outline-danger">Delete</a>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>AttachService information</h1>
+<p th:text="'ID: '+ ${customerType.id}"></p>
+<p th:text="'Name: ' + ${customerType.name}"></p>
+<p th:text="'cost: ' + ${customerType.cost}"></p>
+<p th:text="'Unit: ' + ${customerType.unit}"></p>
+<p th:text="'Status: ' + ${customerType.status}"></p>
+<a th:href="@{/attachService}" class="btn btn-outline-primary">Back</a>
+</body>
+</html>

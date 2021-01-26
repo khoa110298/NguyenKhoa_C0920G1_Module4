@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/index :: head}">
+</head>
+<body>
+<div class="container">
+    <h1>Update ContractDetail</h1>
+    <form th:action="@{/contractDetail/update}" th:object="${customerType}" method="post" novalidate="novalidate">
+        <input class="form-control col-6" type="text" th:field="*{id}" th:readonly/>
+        <div class="form-group">
+            <label class="col-form-label col-2">Contract Id</label>
+            <select th:field="*{contract}" >
+                <option th:each="cusType:${contractList}" th:text="${cusType.id}" th:value="${cusType.id}"
+                        th:selected="(${cusType.id} == *{contract.id})"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">position</label>
+            <select th:field="*{attachService}" >
+                <option th:each="cusType:${attachServiceList}" th:text="${cusType.name}" th:value="${cusType.id}"
+                        th:selected="(${cusType.id} == *{attachService.id})"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">Quantity</label>
+            <input class="form-control col-6" type="text" th:field="*{quantity}"/>
+            <label style="color: red" th:if="${#fields.hasErrors('qauntity')}" th:errors="*{quantity}"></label>
+        </div>
+
+        <input type="submit" class="btn btn-outline-success" value="Save"/>
+
+    </form>
+    <a th:href="@{/contractDetail}" class="btn btn-outline-primary">Back</a>
+</div>
+</body>
+</html>
+</body>
+</html>

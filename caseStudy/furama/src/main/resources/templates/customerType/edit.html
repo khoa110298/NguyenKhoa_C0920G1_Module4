@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en"  xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{/customerType/list :: head}">
+<head th:replace="~{/index :: head}">
 </head>
 <body>
 <div class="container">
-    <h1>Create new CustomerType</h1>
+    <h1>Update CustomerType</h1>
     <form th:action="@{/customerType/update}" th:object="${customerType}" method="post" novalidate="novalidate">
         <input class="form-control col-6" type="text" th:field="*{id}" th:readonly/>
         <div class="form-group">
@@ -13,8 +13,9 @@
             <input class="form-control col-6" type="text" th:field="*{name}"/>
         </div>
         <input type="submit" class="btn btn-outline-success" value="Save"/>
-        <a th:href="@{/customerType}" class="btn btn-outline-primary">Back</a>
+
     </form>
+    <a th:href="@{/customerType}" class="btn btn-outline-primary">Back</a>
 </div>
 </body>
 </html>

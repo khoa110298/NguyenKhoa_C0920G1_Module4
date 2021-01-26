@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Service</title>
+</head>
+<body>
+<h1>Service International</h1>
+<p th:text="'Id Service: ' + ${service.id}"></p>
+<p th:text="'name Service: ' + ${service.name}"></p>
+<p th:text="'Service Area: ' + ${service.area}"></p>
+<p th:text="'Service Cost: ' + ${service.cost}"></p>
+<p th:text="'Service max People: ' + ${service.maxPeople}"></p>
+<p th:text="'Standard Room: ' + ${service.standardRoom}"></p>
+<p th:text="'Description: ' + ${service.description}"></p>
+<p th:text="'pool area: ' + ${service.poolArea}"></p>
+<p th:text="'rent type type: ' + ${service.rentType.name}"></p>
+<p th:text="'service type: ' + ${service.serviceType.name}"></p>
+<a th:href="@{/service}" class="btn btn-outline-primary">Back</a>
+</body>
+</html>

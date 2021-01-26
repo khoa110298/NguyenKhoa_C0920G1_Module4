@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.codegym.entity.Customer;
@@ -13,6 +14,9 @@ import vn.codegym.service.DivisionService;
 import vn.codegym.service.EducationDegreeService;
 import vn.codegym.service.EmployeeService;
 import vn.codegym.service.PositionService;
+
+import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/employee")
@@ -27,9 +31,19 @@ public class EmployeeController {
     EducationDegreeService educationDegreeService;
 
     @GetMapping({"", "/list"})
-    public String listEmployee(Model model, @PageableDefault(value = 5) Pageable pageable) {
-        model.addAttribute("employeeList", employeeService.findAll(pageable));
-        return "/employee/list";
+    public String listEmployee(Model model, @RequestParam Optional<String> keyword, @PageableDefault(value = 5) Pageable pageable) {
+        String keywordOld = "";
+        if (!keyword.isPresent()) {
+            model.addAttribute("employeeList", employeeService.findAll(pageable));
+            return "/employee/list";
+        } else {
+            keywordOld = keyword.get();
+            model.addAttribute("employeeList", employeeService.findAllByName(keywordOld, pageable));
+            model.addAttribute("keywordOld", keywordOld);
+            return "/employee/list";
+        }
+
+
     }
 
     @GetMapping("/create")
@@ -42,26 +56,32 @@ public class EmployeeController {
     }
 
     @PostMapping("/save")
-    public String createEmployee(@ModelAttribute Employee employee, RedirectAttributes redirectAttributes, Model model) {
-        String id = employee.getId();
-        boolean check = true;
-        for (Employee em : employeeService.findAll()) {
-            if (id.equals(em.getId())) {
-                check = false;
-                break;
-            }
-        }
-        if (check){
-            employeeService.save(employee);
-            redirectAttributes.addFlashAttribute("message", "create success!!!");
-            return "redirect:/employee/list";
-        }else {
-            model.addAttribute("message1", "id đã tồn tại!!!");
+    public String createEmployee(@Valid @ModelAttribute Employee employee, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+        if (bindingResult.hasErrors()) {
             model.addAttribute("positionList", positionService.findAll());
             model.addAttribute("educationDegreeList", educationDegreeService.findAll());
             model.addAttribute("divisionList", divisionService.findAll());
-            model.addAttribute("employee", new Employee());
             return "employee/create";
+        } else {
+            String id = employee.getId();
+            boolean check = true;
+            for (Employee em : employeeService.findAll()) {
+                if (id.equals(em.getId())) {
+                    check = false;
+                    break;
+                }
+            }
+            if (check) {
+                employeeService.save(employee);
+                redirectAttributes.addFlashAttribute("message", "create success!!!");
+                return "redirect:/employee/list";
+            } else {
+                model.addAttribute("message1", "id đã tồn tại!!!");
+                model.addAttribute("positionList", positionService.findAll());
+                model.addAttribute("educationDegreeList", educationDegreeService.findAll());
+                model.addAttribute("divisionList", divisionService.findAll());
+                return "employee/create";
+            }
         }
     }
 
@@ -89,31 +109,32 @@ public class EmployeeController {
     }
 
     @PostMapping("/update")
-    public String updateeEmployee(@ModelAttribute Employee employee, RedirectAttributes redirectAttributes, Model model) {
-        String idEmp = employee.getId();
-        boolean check = false;
-        for (Employee em : employeeService.findAll()) {
-            if (idEmp.equals(em.getId())) {
-                check = true;
-                break;
-            }
-        }
-        if (check) {
-            employeeService.save(employee);
-            redirectAttributes.addFlashAttribute("message", "update success!!!");
-            return "redirect:/employee/list";
-        } else {
+    public String updateeEmployee(@Valid @ModelAttribute Employee employee, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+        if (bindingResult.hasErrors()) {
             model.addAttribute("positionList", positionService.findAll());
             model.addAttribute("educationDegreeList", educationDegreeService.findAll());
             model.addAttribute("divisionList", divisionService.findAll());
-            model.addAttribute("message", "id không tồn tại !!!");
             return "/employee/edit";
+        } else {
+            String idEmp = employee.getId();
+            boolean check = false;
+            for (Employee em : employeeService.findAll()) {
+                if (idEmp.equals(em.getId())) {
+                    check = true;
+                    break;
+                }
+            }
+            if (check) {
+                employeeService.save(employee);
+                redirectAttributes.addFlashAttribute("message", "update success!!!");
+                return "redirect:/employee/list";
+            } else {
+                model.addAttribute("positionList", positionService.findAll());
+                model.addAttribute("educationDegreeList", educationDegreeService.findAll());
+                model.addAttribute("divisionList", divisionService.findAll());
+                model.addAttribute("message", "id không tồn tại !!!");
+                return "/employee/edit";
+            }
         }
-    }
-
-    @PostMapping("/search")
-    public String findByNameEmployee(@RequestParam String keyword, @PageableDefault(value = 5) Pageable pageable, Model model) {
-        model.addAttribute("employeeList", employeeService.findAllByName(keyword, pageable));
-        return "/employee/list";
     }
 }
