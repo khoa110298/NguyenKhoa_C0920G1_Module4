@@ -5,7 +5,7 @@
 <body>
 <div class="container">
     <h1>Create new RentType</h1>
-    <form th:action="@{/rentType/save}" th:object="${customerType}" method="post" novalidate="novalidate">
+    <form th:action="@{/rentType/save}" th:object="${rentType}" method="post" novalidate="novalidate">
         <div class="form-group">
             <label class="col-form-label col-2">Name</label>
             <input class="form-control col-6" type="text" th:field="*{name}"/>

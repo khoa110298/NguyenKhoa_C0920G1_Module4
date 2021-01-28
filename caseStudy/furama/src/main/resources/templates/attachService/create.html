@@ -5,7 +5,7 @@
 <body>
 <div class="container">
     <h1>Create new AttachService</h1>
-    <form th:action="@{/attachService/save}" th:object="${customerType}" method="post" novalidate="novalidate">
+    <form th:action="@{/attachService/save}" th:object="${attachService}" method="post" novalidate="novalidate">
         <div class="form-group">
             <label class="col-form-label col-2">Name</label>
             <input class="form-control col-6" type="text" th:field="*{name}"/>

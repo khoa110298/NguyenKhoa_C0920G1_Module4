@@ -14,9 +14,10 @@
 <p th:text="'phone: ' + ${employee.phone}"></p>
 <p th:text="'email: ' + ${employee.email}"></p>
 <p th:text="'address: ' + ${employee.address}"></p>
-<p th:text="'customer type: ' + ${employee.position.name}"></p>
-<p th:text="'customer type: ' + ${employee.educationDegree.name}"></p>
-<p th:text="'customer type: ' + ${employee.division.name}"></p>
+<p th:text="'position: ' + ${employee.position.name}"></p>
+<p th:text="'educationDegree: ' + ${employee.educationDegree.name}"></p>
+<p th:text="'division: ' + ${employee.division.name}"></p>
+<p th:text="'username: ' + ${employee.user.username}"></p>
 <a th:href="@{/employee}" class="btn btn-outline-primary">Back</a>
 </body>
 </html>

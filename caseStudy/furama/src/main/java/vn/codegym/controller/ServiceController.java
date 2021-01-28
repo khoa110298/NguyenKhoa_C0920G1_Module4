@@ -47,15 +47,15 @@ public class ServiceController {
         model.addAttribute("serviceTypeList", serviceTypeDAO.findAll());
         model.addAttribute("rentTypeList", rentTypeService.findAll());
         model.addAttribute("service", new ServiceEntity());
-        return "service/create";
+        return "/service/create";
     }
 
     @PostMapping("/save")
-    public String createService(@Valid @ModelAttribute ServiceEntity serviceEntity, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+    public String createService(@Valid @ModelAttribute("service") ServiceEntity serviceEntity, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("serviceTypeList", serviceTypeDAO.findAll());
             model.addAttribute("rentTypeList", rentTypeService.findAll());
-            return "service/create";
+            return "/service/create";
         } else {
             String id = serviceEntity.getId();
             boolean check = true;
@@ -102,7 +102,7 @@ public class ServiceController {
     }
 
     @PostMapping("/update")
-    public String updateService(@Valid @ModelAttribute ServiceEntity serviceEntity, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+    public String updateService(@Valid @ModelAttribute("service") ServiceEntity serviceEntity, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("serviceTypeList", serviceTypeDAO.findAll());
             model.addAttribute("rentTypeList", rentTypeService.findAll());

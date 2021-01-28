@@ -42,7 +42,6 @@ public class ContractController {
             model.addAttribute("search", search);
             return "/contract/list";
         }
-
     }
 
     @GetMapping("/create")

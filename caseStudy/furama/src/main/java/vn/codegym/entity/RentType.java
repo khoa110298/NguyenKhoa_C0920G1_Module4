@@ -2,6 +2,7 @@ package vn.codegym.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 @Entity(name = "rent_type")
 public class RentType {

@@ -24,11 +24,11 @@ public class AttachServiceController {
     }
     @GetMapping("/create")
     public String showCreate(Model model){
-        model.addAttribute("customerType",new AttachService());
+        model.addAttribute("attachService",new AttachService());
         return "/attachService/create";
     }
     @PostMapping("/save")
-    public String createCustomerType(@Valid @ModelAttribute AttachService customerType, BindingResult bindingResult, RedirectAttributes redirectAttributes,Model model){
+    public String createCustomerType(@Valid @ModelAttribute AttachService customerType, BindingResult bindingResult, RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()){
             return "/attachService/create";
         }else {

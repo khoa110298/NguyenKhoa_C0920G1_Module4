@@ -3,6 +3,7 @@ package vn.codegym.entity;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
 import java.util.List;
 
 @Entity(name = "service")
@@ -13,7 +14,8 @@ public class ServiceEntity {
     private String name;
     @Min(value = 0,message = "Number Format Exception and Area >=0!!!")
     private String area;
-    @Min(value = 0,message = "Number Format Exception and Cost >=0!!!")
+//    @Min(value = 0,message = "Number Format Exception and Cost >=0!!!")
+    @Positive
     private String cost;
     @Pattern(regexp = "^[1-9]+\\d*$",message = "Number Format Exception and maxPeople is Integer")
     private String maxPeople;

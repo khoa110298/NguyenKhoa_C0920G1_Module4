@@ -24,7 +24,7 @@ public class CustomerController {
     CustomerService customerService;
 
     @GetMapping({"", "/list"})
-    public String listCustomer(Model model, @RequestParam Optional<String> keyword, @PageableDefault(value = 5) Pageable pageable) {
+    public String listCustomer(Model model, @RequestParam Optional<String> keyword, @PageableDefault(value = 3) Pageable pageable) {
         String keywordOld = "";
         if (!keyword.isPresent()) {
             model.addAttribute("customerList", customerService.findAll(pageable));
@@ -65,7 +65,6 @@ public class CustomerController {
             } else {
                 model.addAttribute("messageId", "id đã tồn tại!!");
                 model.addAttribute("customerTypeList", customerTypeService.findAll());
-                model.addAttribute("customer", new Customer());
                 return "customer/create";
             }
         }
@@ -79,8 +78,8 @@ public class CustomerController {
         return "/customer/view";
     }
 
-    @GetMapping("/{id}/delete")
-    public String deleteCustomer(@PathVariable("id") String id, RedirectAttributes redirectAttributes) {
+    @GetMapping("/delete")
+    public String deleteCustomer(@RequestParam("id") String id, RedirectAttributes redirectAttributes) {
         customerService.remove(id);
         redirectAttributes.addFlashAttribute("message", "delete success!!!");
         return "redirect:/customer/list";

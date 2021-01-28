@@ -16,6 +16,7 @@
                 <th>Contract ID</th>
                 <th>AttachService Name</th>
                 <th>Quantity</th>
+                <th>tổng tiền</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -27,6 +28,7 @@
                     <td th:text="${cusType.contract.id}"></td>
                     <td th:text="${cusType.attachService.name}"></td>
                     <td th:text="${cusType.quantity}"></td>
+                    <td th:text="${cusType.contract.serviceEntity.cost + cusType.quantity*cusType.attachService.cost}"></td>
                     <td><a th:href="@{/contractDetail/{id}/update(id=${cusType.id})}" class="btn btn-outline-primary">Edit</a>
                     </td>
                     <td><a th:href="@{/contractDetail/{id}/delete(id=${cusType.id})}" class="btn btn-outline-danger">Delete</a>

@@ -62,6 +62,12 @@
                 <option th:each="cusType:${divisionList}" th:text="${cusType.name}" th:value="${cusType.id}"></option>
             </select>
         </div>
+        <div class="form-group">
+            <label class="col-form-label col-2">username</label>
+            <select th:field="*{user}" >
+                <option th:each="cusType:${userList}" th:text="${cusType.username}" th:value="${cusType.id}"></option>
+            </select>
+        </div>
         <input type="submit" class="btn btn-outline-success" value="Create"/>
 
     </form>

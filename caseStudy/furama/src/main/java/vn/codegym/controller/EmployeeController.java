@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import vn.codegym.entity.Customer;
 import vn.codegym.entity.Employee;
-import vn.codegym.service.DivisionService;
-import vn.codegym.service.EducationDegreeService;
-import vn.codegym.service.EmployeeService;
-import vn.codegym.service.PositionService;
+import vn.codegym.service.*;
 
 import javax.validation.Valid;
 import java.util.Optional;
@@ -29,6 +26,8 @@ public class EmployeeController {
     PositionService positionService;
     @Autowired
     EducationDegreeService educationDegreeService;
+    @Autowired
+    UserService userService;
 
     @GetMapping({"", "/list"})
     public String listEmployee(Model model, @RequestParam Optional<String> keyword, @PageableDefault(value = 5) Pageable pageable) {
@@ -51,6 +50,7 @@ public class EmployeeController {
         model.addAttribute("positionList", positionService.findAll());
         model.addAttribute("educationDegreeList", educationDegreeService.findAll());
         model.addAttribute("divisionList", divisionService.findAll());
+        model.addAttribute("userList", userService.findAll());
         model.addAttribute("employee", new Employee());
         return "employee/create";
     }
@@ -61,6 +61,7 @@ public class EmployeeController {
             model.addAttribute("positionList", positionService.findAll());
             model.addAttribute("educationDegreeList", educationDegreeService.findAll());
             model.addAttribute("divisionList", divisionService.findAll());
+            model.addAttribute("userList", userService.findAll());
             return "employee/create";
         } else {
             String id = employee.getId();
@@ -80,6 +81,7 @@ public class EmployeeController {
                 model.addAttribute("positionList", positionService.findAll());
                 model.addAttribute("educationDegreeList", educationDegreeService.findAll());
                 model.addAttribute("divisionList", divisionService.findAll());
+                model.addAttribute("userList", userService.findAll());
                 return "employee/create";
             }
         }
@@ -92,8 +94,8 @@ public class EmployeeController {
         return "/employee/view";
     }
 
-    @GetMapping("/{id}/delete")
-    public String deleteEmployee(@PathVariable("id") String id, RedirectAttributes redirectAttributes) {
+    @GetMapping("/delete")
+    public String deleteEmployee(@RequestParam("id") String id, RedirectAttributes redirectAttributes) {
         employeeService.remove(id);
         redirectAttributes.addFlashAttribute("message", "delete success!!!");
         return "redirect:/employee/list";
@@ -104,6 +106,7 @@ public class EmployeeController {
         model.addAttribute("positionList", positionService.findAll());
         model.addAttribute("educationDegreeList", educationDegreeService.findAll());
         model.addAttribute("divisionList", divisionService.findAll());
+        model.addAttribute("userList", userService.findAll());
         model.addAttribute("employee", employeeService.findById(id));
         return "/employee/edit";
     }
@@ -114,6 +117,7 @@ public class EmployeeController {
             model.addAttribute("positionList", positionService.findAll());
             model.addAttribute("educationDegreeList", educationDegreeService.findAll());
             model.addAttribute("divisionList", divisionService.findAll());
+            model.addAttribute("userList", userService.findAll());
             return "/employee/edit";
         } else {
             String idEmp = employee.getId();
@@ -132,6 +136,7 @@ public class EmployeeController {
                 model.addAttribute("positionList", positionService.findAll());
                 model.addAttribute("educationDegreeList", educationDegreeService.findAll());
                 model.addAttribute("divisionList", divisionService.findAll());
+                model.addAttribute("userList", userService.findAll());
                 model.addAttribute("message", "id không tồn tại !!!");
                 return "/employee/edit";
             }

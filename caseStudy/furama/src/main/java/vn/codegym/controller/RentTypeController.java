@@ -26,16 +26,16 @@ public class RentTypeController {
 
     @GetMapping("/create")
     public String showCreate(Model model) {
-        model.addAttribute("customerType", new RentType());
+        model.addAttribute("rentType", new RentType());
         return "/rentType/create";
     }
 
     @PostMapping("/save")
-    public String createCustomerType(@Valid @ModelAttribute RentType customerType, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+    public String createCustomerType(@Valid @ModelAttribute RentType RentType, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasErrors()) {
             return "/rentType/create";
         } else {
-            customerTypeService.save(customerType);
+            customerTypeService.save(RentType);
             redirectAttributes.addFlashAttribute("message", "create success!!!");
             return "redirect:/rentType";
         }

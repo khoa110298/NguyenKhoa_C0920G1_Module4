@@ -1,7 +1,5 @@
 package vn.codegym.entity;
 
-import org.springframework.format.annotation.NumberFormat;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
@@ -38,6 +36,10 @@ public class Employee {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "division_id",referencedColumnName = "id")
     private Division division;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "username",referencedColumnName = "username")
+    private User user;
 
     @OneToMany(mappedBy = "employee")
     List<Contract> contractList;
@@ -153,5 +155,13 @@ public class Employee {
 
     public void setContractList(List<Contract> contractList) {
         this.contractList = contractList;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
